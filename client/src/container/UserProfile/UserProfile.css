@@ -1,0 +1,93 @@
+/* UserProfile.css */
+
+.userProfileupdate {
+    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: aliceblue;
+  background: linear-gradient(
+    rgb(27, 20, 20),
+    rgba(54, 41, 43, 0.5)
+  ), url("../../assets/welcomeShop.jpg");
+  background-size: cover;
+  backdrop-filter: blur(10px);
+  background-color: rgba(139, 47, 47, 0.2);
+    margin: auto;
+  }
+  
+  .userProfileupdate form {
+    width: 46%;
+    padding: 20px;
+    /* background-color: #4e2e2e; */
+    border-radius: 5px;
+  }
+  
+  .userProfileupdate h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 70px;
+  }
+  
+  .userProfileupdate label {
+    display: block;
+    margin-bottom: 5px;
+
+  }
+  
+  .userProfileupdate input[type='text'],
+  .userProfileupdate input[type='email'],
+  .userProfileupdate input[type='phone'],
+  .userProfileupdate textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+  
+  .userProfileupdate button[type='submit'] {
+    width: 100%;
+    padding: 10px;
+    background-color: var( --color-golden);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 10vh;
+  }
+  
+  .userProfileupdate button[type='submit']:hover {
+    background-color: rgb(197, 152, 84);
+  }
+  
+  .userProfileupdate .alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    margin-bottom: 15px;
+    opacity: 0.9;
+    transition: opacity 0.6s;
+    border-radius: 3px;
+    position: relative;
+  }
+  
+  .userProfileupdate .alert .closebtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .userProfileupdate .alert .closebtn:hover {
+    color: black;
+  }
+  
+  .userProfileupdate .alert strong {
+    margin-left: 10px;
+  }
+  

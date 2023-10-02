@@ -1,0 +1,201 @@
+.add {
+    display: flex;
+    justify-content: center;
+    color: aliceblue;
+    background: linear-gradient(rgb(27, 20, 20), rgba(54, 41, 43, 0.5)),
+      url('../../../../assets/reg-pic.jpg');
+    background-size: cover;
+    backdrop-filter: blur(10px);
+    /* background-color: rgba(225, 233, 207, 0.2); */
+  }
+  
+  .add .container {
+    margin-top: 10;
+    width: 100%; /* Modify width to 100% for responsiveness */
+    max-width: 1400px; /* Add max-width to limit container width */
+    padding: 50px 0px;
+  }
+  .titlep {
+    display: flex;
+    /* justify-content: center;
+      align-items: center; */
+    font-family: var(--font-base);
+    color: var(--color-golden);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: capitalize;
+    line-height: 117px;
+    font-size: 90px;
+    margin-left: 10vh;
+  }
+  .add .container h1 {
+    width: max-content;
+    margin: 30px auto;
+    color: rgb(247, 232, 232);
+    font-weight: 300;
+    font-size: 80px;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important; /* Center the text horizontally */
+  }
+  
+  .add .container .sections {
+    display: flex;
+    flex-wrap: wrap; /* Allow sections to wrap on smaller screens */
+    justify-content: space-between;
+    gap: 20px; /* Reduce the gap between sections for smaller screens */
+  }
+  
+  .add .container .sections label {
+    color: rgb(202, 194, 194);
+    font-size: 18px;
+  }
+  
+  .add .container .sections .info,
+  .add .container .sections .details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+  }
+  
+  .add .container .sections .info input,
+  .add .container .sections .info select,
+  .add .container .sections .info textarea,
+  .add .container .sections .details input,
+  .add .container .sections .details select,
+  .add .container .sections .details textarea {
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%; /* Set input, select, and textarea width to 100% */
+  }
+  
+  .add .container .sections .details .images {
+    display: flex;
+    flex-wrap: wrap; /* Allow images to wrap on smaller screens */
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .add .container .sections .details .images .imagesInputs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .imagesInputs {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  #file {
+    display: none; /* Hide the default file input */
+  }
+  
+  .custom-file-upload {
+    /* Style your custom button as desired */
+    /* Example styles */
+    margin-top: 20px;
+    border-radius: 10px;
+    border: none;
+    padding: 20px;
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    background-color: rgb(135, 136, 54);
+    cursor: pointer;
+  }
+  #file-upload {
+    display: none;
+  }
+  
+  .custom-file-upload {
+    /* Customize the button as desired */
+    /* Example styles */
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgb(135, 136, 54);
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .add .container .sections .details button {
+    border-radius: 10px;
+    border: none;
+    padding: 20px;
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    background-color: var(--color-golden);
+    cursor: pointer;
+  }
+  
+  .add .container .sections .details .add {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .add .container .sections .details .add input {
+    width: 80%;
+  }
+  
+  .add .container .sections .details .addedFeatures {
+    display: flex;
+    flex-wrap: wrap; /* Allow added features to wrap on smaller screens */
+    gap: 20px;
+  }
+  .create {
+    border-radius: 10px;
+    border: none;
+    padding: 20px;
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    background-color: var(--color-golden);
+    cursor: pointer;
+  }
+  .add .container .sections .details .addedFeatures button {
+    height: 30px;
+    font-size: 12px;
+    font-weight: 400;
+    background: transparent;
+    color: red;
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Reduce the gap between icon and text for smaller screens */
+  }
+  .viewImg img{
+    width: 100px;
+    height: 100px;
+  }
+  
+  /* Media Query for Mobile Screens */
+  @media screen and (max-width: 767px) {
+    .add .container {
+      padding: 30px 0px; /* Reduce top and bottom padding for smaller screens */
+    }
+  
+    .add .container .sections {
+      flex-direction: column; /* Stack sections vertically on smaller screens */
+      gap: 15px; /* Reduce the gap between sections for smaller screens */
+    }
+  
+    .add .container .sections .info,
+    .add .container .sections .details {
+      flex: none; /* Remove flex property to allow sections to take full width */
+    }
+  
+    .add .container .sections .details button {
+      padding: 15px; /* Reduce button padding for smaller screens */
+    }
+  
+    .add .container .sections .details .images {
+      justify-content: center; /* Center align images on smaller screens */
+    }
+  
+    .add .container .sections .details .images .imagesInputs {
+      gap: 10px; /* Reduce the gap between image inputs for smaller screens */
+    }
+  }
+  
