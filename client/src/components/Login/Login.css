@@ -1,0 +1,79 @@
+.login {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: aliceblue;
+  background: linear-gradient(
+    rgb(27, 20, 20),
+    rgba(54, 41, 43, 0.5)
+  ), url("../../assets/welcomeShop.jpg");
+  background-size: cover;
+  backdrop-filter: blur(10px);
+  background-color: rgba(139, 47, 47, 0.2);
+}
+.error {
+  color: rgb(245, 12, 12);
+  font-size: 16px;
+  margin-top: 5px;
+  text-shadow: -0.5px 0.5px 0 rgb(241, 245, 228);
+}
+
+.loginTitle {
+  font-size: 80px;
+}
+
+.loginForm {
+  /* Adjusted margin-top value */
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  font-size: 20px;
+  max-width: 400px;
+}
+
+.loginForm > label {
+  margin: 5px 0;
+  margin-top: 20px;
+}
+
+.loginInput {
+  padding: 20px;
+  background-color: rgb(240, 229, 229);
+  border: none;
+  border-radius: 10px;
+}
+
+.loginButton {
+  margin-top: 20px;
+  cursor: pointer;
+  background-color: var(--color-golden);
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(88, 72, 72);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.loginButton:hover {
+  background-color: rgb(184, 214, 127);
+}
+
+.loginButton:disabled {
+  cursor: not-allowed;
+  background-color: coral;
+}
+
+.loginRegisterButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: lightcoral;
+  cursor: pointer;
+  border: none;
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
+}
