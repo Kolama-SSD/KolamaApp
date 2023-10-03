@@ -19,12 +19,16 @@ export const register = async (req, res, next) => {
   }
 };
 
-// Login for users
+//login for users
 export const login = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
 
     if (!user) return next(createError(404, 'User not found!'));
+
+    const isCorrect = bcrypt.compareSync(req.body.password, user.password);
+    if (!isCorrect)
+      return next(createError(400, 'Wrong password or email!'));
 
     const token = jwt.sign(
       {
