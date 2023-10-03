@@ -4,6 +4,7 @@ import newRequest from '../../utils/newRequest';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import GoogleSignIn from '../GoogleSignIn/GoogleSignIn';
+import FacebookSignIn from '../FacebookSignIn/FacebookSignIn';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -94,6 +95,8 @@ const Login = () => {
           </a>
         </p>
             <GoogleSignIn ref={googleSignInRef} successLogin={successGoogleLogin} errorLogin={errorGoogleLogin}></GoogleSignIn>
+            <br/>
+            <FacebookSignIn></FacebookSignIn>
       </form>
     </div>
   );
