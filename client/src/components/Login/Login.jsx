@@ -1,83 +1,93 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import './Login.css';
 import newRequest from '../../utils/newRequest';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 
 const Login = () => {
   const navigate = useNavigate();
+  // Define Yup validation schema
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email').required('Email is required'),
+    password: Yup.string().required('Password is required'),
+  });
 
-  // Define state for form fields
-  const [formData, setFormData] = useState({ email: '', password: '' });
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+
+
+
 
   // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
-
-      const res = await newRequest.get('/auth/login', {
-        email: formData.email,
-        password: formData.password,
+      const res = await newRequest.post('/auth/login', {
+        email: values.email,
+        password: values.password,
       });
-
       console.log(res.data);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('currentUser', JSON.stringify(res.data.info));
       const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-      toast.success(currentUser.username + ' Login Successfully', {
+      toast.success(currentUser.username + " Login Successfully", {
         position: toast.POSITION.TOP_RIGHT,
       });
       navigate('/');
     } catch (err) {
-      setFormErrors({ error: err.response.data });
+      setErrors({ error: err.response.data });
       toast.error(err.response.data, {
         position: toast.POSITION.TOP_RIGHT,
       });
+    } finally {
+      setSubmitting(false);
     }
   };
 
   return (
     <div className='login'>
       <span className='loginTitle'>Login</span>
-      <form className='loginForm' onSubmit={handleSubmit}>
-        <label htmlFor='email'>Email</label>
-        <input
-          type='text'
-          id='email'
-          name='email'
-          placeholder='Enter your email...'
-          className='loginInput'
-          value={formData.email}
-          onChange={handleInputChange}
-        />
+      <Formik
+        initialValues={{ email: '', password: '' }}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form className='loginForm'>
+            <label htmlFor='email'>Email</label>
+            <Field
+              type='text'
+              id='email'
+              name='email'
+              placeholder='Enter your email...'
+              className='loginInput'
+            />
+            <ErrorMessage name='email' component='div' className='error' />
 
-        <label htmlFor='password'>Password</label>
-        <input
-          type='password'
-          id='password'
-          name='password'
-          placeholder='Enter your password...'
-          className='loginInput'
-          value={formData.password}
-          onChange={handleInputChange}
-        }
+            <label htmlFor='password'>Password</label>
+            <Field
+              type='password'
+              id='password'
+              name='password'
+              placeholder='Enter your password...'
+              className='loginInput'
+            />
+            <ErrorMessage name='password' component='div' className='error' />
 
-        <button type='submit' className='loginButton'>
-          Login
-        </button>
-        <p style={{ color: 'red' }}>
-          If You don't have an Account ?
-          <a href="/register" style={{ color: 'white' }}>
-            Click Here
-          </a>
-        </p>
-      </form>
+            <button
+              type='submit'
+              className='loginButton'
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Logging in...' : 'Login'}
+            </button>
+            <p style={{ color:"red" }}>If You don't have an Account ?
+            <a href="/register" style={{ color:"white" }}> Click Here</a>
+            </p>
+          </Form>
+        )}
+      </Formik>
+      {/* <button className='loginRegisterButton'>Register</button> */}
     </div>
   );
 };

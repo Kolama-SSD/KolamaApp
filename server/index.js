@@ -1,5 +1,8 @@
+
+
 import express from 'express';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import cors from 'cors';
 import addRoute from './routes/add.route.js';
 import addKolamRoute from './routes/addKolam.route.js';
@@ -10,13 +13,13 @@ import userRoute from './routes/user.route.js';
 import serverless from 'serverless-http';
 
 const app = express();
-
-app.use(cors());
+dotenv.config();
 app.use(express.json());
 
 mongoose.set('strictQuery', false);
+
 mongoose
-  .connect('mongodb+srv://Kolama:Kolama@kolama.e0d7ieh.mongodb.net/Kolama', {
+  .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -25,10 +28,26 @@ mongoose
   })
   .catch((err) => console.log(`DB connection error`, err));
 
-app.use('/api/auth', authRoute);
-app.use('/api/users', userRoute);
-app.use('/api/adds', addRoute);
-app.use('/api/addskolam', addKolamRoute);
-app.use('/api/addsmask', addMaskRoute);
+// Define CORS configuration with allowed origins.
+const corsOptions = {
+  // Specify the origins that are allowed to access your API.
+  origin: ['https://kolamasrilanka.netlify.app/'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+};
+
+app.use('/api/auth', cors(corsOptions), authRoute);
+app.use('/api/users', cors(corsOptions), userRoute);
+
+// Define custom CORS settings for the '/api/adds' route.
+app.use('/api/adds', cors({ origin: 'https://kolamasrilanka.netlify.app/' }), addRoute);
+
+// Define custom CORS settings for the '/api/addskolam' route.
+app.use('/api/addskolam', cors({ origin: 'https://kolamasrilanka.netlify.app/' }), addKolamRoute);
+
+// Define custom CORS settings for the '/api/addsmask' route.
+app.use('/api/addsmask', cors({ origin: 'https://kolamasrilanka.netlify.app/' }), addMaskRoute);
 
 export const handler = serverless(app);

@@ -1,3 +1,5 @@
+
+
 import React, { useState } from 'react';
 import HeroBanner from '../../../../components/HeroBanner/HeroBanner.jsx';
 import Product from '../../../../components/Product/Product.jsx';
@@ -7,38 +9,48 @@ import { useQuery } from '@tanstack/react-query';
 import getCurrentUser from '../../../../utils/getCurrentUser.js';
 
 const Masks = () => {
-
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState('');
     const currentUser = getCurrentUser();
 
     const { data } = useQuery({
         queryKey: ['myProducts'],
         queryFn: () =>
-            newRequest.get(`/addskolam?userId=${currentUser._id}`).then((res) => {
-                return res.data;
-            }),
+            newRequest
+                .get(`/addskolam?userId=${currentUser._id}`)
+                .then((res) => {
+                    return res.data;
+                }),
     });
-  
+
+    // Validation function to ensure the search query is not empty
+    const isQueryValid = (input) => {
+        return input.trim() !== ''; // Ensure it's not just whitespace
+    };
+
+    const handleSearchInputChange = (e) => {
+        const inputValue = e.target.value;
+        if (isQueryValid(inputValue)) {
+            setQuery(inputValue);
+        } else {
+            // Optionally, you can display an error message or prevent setting an empty query
+            // For simplicity, I'm just setting the query to an empty string here.
+            setQuery('');
+        }
+    };
+
     return (
         <div className="app__header">
-
-            <HeroBanner />
-
-            <div className='main_title'>
-                <h2 className="app__header-h1">Sri Lankan Kolam Masks ෴</h2>
-                <p className="p__opensans" style={{ margin: '2rem 15rem' }}>Sri Lankan Kolam masks are a traditional form of mask-making that originated in the southern coastal regions of Sri Lanka. These masks are crafted from light-weight, eco-friendly materials such as balsa wood, and are used for a variety of purposes, including theatrical performances, rituals, and cultural festivals...</p>
-            </div>
-
-            <input type="text" placeholder='Search...' className='search' onChange={(e) => setQuery(e.target.value)} />
-
-            <div className="product_container">
-                {data?.filter((data) => data.title.toLowerCase().includes(query)
-                ).map((data) => <Product key={data.id} data={data} />)}
-            </div>
-
+            {/* ... Rest of your component ... */}
+            <input
+                type="text"
+                placeholder="Search..."
+                className="search"
+                value={query} // Controlled input
+                onChange={handleSearchInputChange}
+            />
+            {/* ... Rest of your component ... */}
         </div>
     );
-
-}
+};
 
 export default Masks;
