@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './Login.css';
 import newRequest from '../../utils/newRequest';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import GoogleSignIn from '../GoogleSignIn/GoogleSignIn';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -35,12 +36,27 @@ const Login = () => {
       });
       navigate('/');
     } catch (err) {
-      setFormErrors({ error: err.response.data });
+      // setFormErrors({ error: err.response.data });
       toast.error(err.response.data, {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
   };
+
+  const googleSignInRef = useRef(null);
+
+  const successGoogleLogin = ()=> {
+    toast.success("Login Successfully", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+    navigate('/');
+  }
+
+  const errorGoogleLogin = ()=> {
+    toast.error({
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  }
 
   return (
     <div className='login'>
@@ -66,7 +82,7 @@ const Login = () => {
           className='loginInput'
           value={formData.password}
           onChange={handleInputChange}
-        }
+        />
 
         <button type='submit' className='loginButton'>
           Login
@@ -77,6 +93,7 @@ const Login = () => {
             Click Here
           </a>
         </p>
+            <GoogleSignIn ref={googleSignInRef} successLogin={successGoogleLogin} errorLogin={errorGoogleLogin}></GoogleSignIn>
       </form>
     </div>
   );
