@@ -5,6 +5,7 @@ import './Login.css';
 import newRequest from '../../utils/newRequest';
 import { useNavigate } from 'react-router-dom';
 import {  toast } from 'react-toastify';
+import DOMPurify from 'dompurify';
 
 const Login = () => {
   const navigate = useNavigate();
