@@ -28,11 +28,15 @@ const Login = () => {
       console.log(res.data);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('currentUser', JSON.stringify(res.data.info));
-      const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+      const sanitizedUsername = DOMPurify.sanitize(currentUser.username);
 
-      toast.success(currentUser.username + " Login Successfully", {
-        position: toast.POSITION.TOP_RIGHT,
+      toast.success(sanitizedUsername + ' Login Successfully', {
+        position: toast.POSITION.TOP_RIGHT
       });
+
+      
+
+
       navigate('/');
     } catch (err) {
       setErrors({ error: err.response.data });
